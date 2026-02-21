@@ -26,6 +26,7 @@ function Search({ searchData, placeholder }) {
             placeholder={placeholder}
             className={styles.search}
             required
+            data-testid="search-input"
           />
         </label>
 
