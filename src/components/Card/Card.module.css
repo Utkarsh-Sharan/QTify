@@ -1,9 +1,9 @@
 .card {
-    width: 159px;
-    height: 232px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  width: 159px;
+  height: 232px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .image {
