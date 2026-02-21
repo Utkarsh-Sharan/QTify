@@ -1,0 +1,11 @@
+.button {
+    background-color: var(--color-black);
+    color: var(--color-green);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0.25px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
