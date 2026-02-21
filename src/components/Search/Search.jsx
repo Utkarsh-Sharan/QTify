@@ -1,114 +1,63 @@
-import React from "react";
 import styles from "./Search.module.css";
 import searchIcon from "../../assets/search-icon.svg";
 import {Autocomplete} from "@base-ui/react/autocomplete";
-import { styled } from "@mui/system";
 // import { truncate } from "../../helpers/helpers";
 import { useNavigate } from "react-router-dom";
-import { Tooltip } from "@mui/material";
-
-const Listbox = styled("ul")(({ theme }) => ({
-  width: "100%",
-  margin: 0,
-  padding: 0,
-  position: "absolute",
-  borderRadius: "0px 0px 10px 10px",
-  border: "1px solid var(--color-primary)",
-  top: 60,
-  height: "max-content",
-  maxHeight: "500px",
-  zIndex: 10,
-  overflowY: "scroll",
-  left: 0,
-  bottom: 0,
-  right: 0,
-  listStyle: "none",
-  backgroundColor: "var(--color-black)",
-  overflow: "auto",
-  "& li.Mui-focused": {
-    backgroundColor: "#4a8df6",
-    color: "white",
-    cursor: "pointer",
-  },
-  "& li:active": {
-    backgroundColor: "#2977f5",
-    color: "white",
-  },
-}));
+import { useState } from "react";
 
 function Search({ searchData, placeholder }) {
-  const {
-    getRootProps,
-    getInputLabelProps,
-    value,
-    getInputProps,
-    getListboxProps,
-    getOptionProps,
-    groupedOptions,
-  } = useAutocomplete({
-    id: "use-autocomplete-demo",
-    options: searchData || [],
-    getOptionLabel: (option) => option.title,
-  });
-
   const navigate = useNavigate();
-  const onSubmit = (e, value) => {
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    navigate(`/album/${value.slug}`);
+    if (selectedValue) navigate(`/album/${selectedValue.slug}`);
     //Process form data, call API, set state etc.
   };
 
   return (
-    <div style={{ position: "relative" }}>
-      <form
-        className={styles.wrapper}
-        onSubmit={(e) => {
-          onSubmit(e, value);
-        }}
+    <form className={styles.wrapper} onSubmit={handleSubmit}>
+      <Autocomplete.Root
+        items={searchData || []}
+        onValueChange={(val) => setSelectedValue(val)}
       >
-        <div {...getRootProps()}>
-          <input
-            name="album"
-            className={styles.search}
+        <label className={styles.Label}>
+          <Autocomplete.Input
             placeholder={placeholder}
+            className={styles.search}
             required
-            {...getInputProps()}
           />
-        </div>
-        <div>
-          <button className={styles.searchButton} type="submit">
-            <img src={searchIcon} alt="search-icon" />
-          </button>
-        </div>
-      </form>
-      {groupedOptions.length > 0 ? (
-        <Listbox {...getListboxProps()}>
-          {groupedOptions.map((option, index) => {
-            // console.log(option);
-            const artists = option.songs.reduce((accumulator, currentValue) => {
-              accumulator.push(...currentValue.artists);
-              return accumulator;
-            }, []);
+        </label>
 
-            return (
-              <li
-                className={styles.listElement}
-                {...getOptionProps({ option, index })}
-              >
-                <div>
-                  <p className={styles.albumTitle}>{option.title}</p>
+        <button className={styles.searchButton} type="submit">
+          <img src={searchIcon} alt="search-icon" />
+        </button>
 
-                  <p className={styles.albumArtists}>
-                    {/* {truncate(artists.join(", "), 40)} */}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
-        </Listbox>
-      ) : null}
-    </div>
+        <Autocomplete.Portal>
+          <Autocomplete.Positioner className={styles.Positioner} sideOffset={4}>
+            <Autocomplete.Popup className={styles.Popup}>
+              <Autocomplete.Empty className={styles.Empty}>
+                No albums found.
+              </Autocomplete.Empty>
+              <Autocomplete.List className={styles.List}>
+                {(option) => (
+                  <Autocomplete.Item
+                    key={option.id}
+                    className={styles.listElement}
+                    value={option}
+                  >
+                    <p className={styles.albumTitle}>{option.title}</p>
+                    <p className={styles.albumArtists}>
+                      {option.songs.flatMap((song) => song.artists).join(", ")}
+                    </p>
+                  </Autocomplete.Item>
+                )}
+              </Autocomplete.List>
+            </Autocomplete.Popup>
+          </Autocomplete.Positioner>
+        </Autocomplete.Portal>
+      </Autocomplete.Root>
+    </form>
   );
 }
 
