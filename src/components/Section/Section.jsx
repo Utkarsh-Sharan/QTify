@@ -1,7 +1,8 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../lib/axios.js";
 import TopAlbumsSection from "./TopAlbumsSection.jsx";
+import HorizontalDivider from "../Dividers/HorizontalDivider.jsx";
 
 function Section() {
   const [topAlbums, setTopAlbums] = useState([]);
@@ -28,24 +29,9 @@ function Section() {
   return (
     <>
       <Box px="15px">
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Typography sx={{ fontSize: "20px", fontWeight: "600" }}>
-            Top Albums
-          </Typography>
-          <Button
-            sx={{
-              textTransform: "none",
-              color: "primary.main",
-              fontSize: "20px",
-              fontWeight: "600",
-            }}
-          >
-            Show all
-          </Button>
-        </Box>
-        <Grid container mt="10px" spacing={3}>
-          <TopAlbumsSection topAlbums={topAlbums}/>
-        </Grid>
+        <TopAlbumsSection topAlbums={topAlbums} />
+
+        <HorizontalDivider />
       </Box>
     </>
   );
