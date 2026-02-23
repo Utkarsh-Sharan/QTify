@@ -28,7 +28,7 @@ function Section() {
 
   return (
     <>
-      <Box px="15px">
+      <Box px="15px" position="relative">
         <TopAlbumsSection topAlbums={topAlbums} />
 
         <HorizontalDivider />
