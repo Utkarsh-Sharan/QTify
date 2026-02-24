@@ -9,21 +9,23 @@ import SongsSection from "./SongsSection.jsx";
 function Section() {
   const [topAlbums, setTopAlbums] = useState([]);
   const [newAlbums, setNewAlbums] = useState([]);
-  const [songs, setSongs] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   const fetchAllAlbums = async () => {
     try {
-      const [topRes, newRes, songs] = await Promise.allSettled([
+      const [topRes, newRes, genresRes] = await Promise.allSettled([
         axiosInstance.get("/albums/top"),
         axiosInstance.get("/albums/new"),
-        axiosInstance.get("/songs"),
+        axiosInstance.get("/genres")
       ]);
 
       setTopAlbums(topRes.value.data);
       setNewAlbums(newRes.value.data);
-      setSongs(songs.value.data);
+      setGenres(genresRes.value.data.data);
     } catch (error) {
-      console.log(error);
+      if (error?.response?.status < 500)
+        console.log(error?.response?.data?.message);
+      else console.log("Something went wrong!");
     }
   };
 
@@ -46,7 +48,7 @@ function Section() {
 
         <HorizontalDivider />
 
-        <SongsSection songs={songs} />
+        <SongsSection tabs={genres} />
 
         <HorizontalDivider />
       </Box>
