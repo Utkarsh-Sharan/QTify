@@ -25,9 +25,9 @@ function Carousel({ albums, carouselId }) {
         }}
         spaceBetween={3}
         breakpoints={{
-          0: { slidesPerView: 3, slidesPerGroup: 3 },
-          600: { slidesPerView: 4, slidesPerGroup: 4 },
-          1200: { slidesPerView: 6, slidesPerGroup: 6 },
+          0: { slidesPerView: 3 },
+          600: { slidesPerView: 4 },
+          1200: { slidesPerView: 6 },
         }}
       >
         {albums.map((album) => (
