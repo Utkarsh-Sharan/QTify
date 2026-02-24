@@ -1,0 +1,26 @@
+.topAlbums-next,
+.topAlbums-prev,
+.newAlbums-next,
+.newAlbums-prev {
+  all: unset;
+  position: absolute;
+  top: 40%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.newAlbums-prev,
+.topAlbums-prev {
+  left: 1%;
+}
+
+.topAlbums-next,
+.newAlbums-next {
+  right: 1%;
+}
+
+.elements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

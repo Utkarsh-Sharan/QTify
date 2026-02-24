@@ -4,7 +4,7 @@ import AlbumHeader from "../Header/AlbumHeader";
 import Carousel from "../Carousel/Carousel";
 import AlbumGrid from "../Grid/AlbumGrid";
 
-function TopAlbumsSection({ topAlbums }) {
+function NewAlbumsSection({newAlbums}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -14,20 +14,20 @@ function TopAlbumsSection({ topAlbums }) {
   return (
     <>
       <AlbumHeader handleToggle={handleToggle} isOpen={isOpen}>
-        {"Top Albums"}
+        {"New Albums"}
       </AlbumHeader>
 
       <Collapse in={isOpen} timeout={500} unmountOnExit>
-        <AlbumGrid albums={topAlbums} />
+        <AlbumGrid albums={newAlbums} />
       </Collapse>
 
       <Collapse in={!isOpen} timeout={500} unmountOnExit>
         <Box position="relative">
-          <Carousel albums={topAlbums} carouselId={"topAlbums"} />
+          <Carousel albums={newAlbums} carouselId={"newAlbums"} />
         </Box>
       </Collapse>
     </>
   );
 }
 
-export default TopAlbumsSection;
+export default NewAlbumsSection;
