@@ -7,9 +7,25 @@ import "./Carousel.css";
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 
-function Carousel({ albums, carouselId }) {
+function Carousel({ albums = [], songs = [], carouselId }) {
   const prevButton = `${carouselId}-prev`;
   const nextButton = `${carouselId}-next`;
+
+  const renderAlbums = () => {
+    return albums.map((album) => (
+      <SwiperSlide key={album.id} className="elements">
+        <Card album={album} />
+      </SwiperSlide>
+    ));
+  }
+
+  const renderSongs = () => {
+    return songs.map((song) => (
+      <SwiperSlide key={song.id} className="elements">
+        <Card song={song} />
+      </SwiperSlide>
+    ))
+  }
 
   return (
     <>
@@ -30,11 +46,7 @@ function Carousel({ albums, carouselId }) {
           1200: { slidesPerView: 6 },
         }}
       >
-        {albums.map((album) => (
-          <SwiperSlide key={album.id} className="elements">
-            <Card album={album} />
-          </SwiperSlide>
-        ))}
+        {(albums && albums.length) ? renderAlbums() : renderSongs()}
       </Swiper>
     </>
   );

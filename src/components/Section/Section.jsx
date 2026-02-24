@@ -4,25 +4,28 @@ import { axiosInstance } from "../../lib/axios.js";
 import TopAlbumsSection from "./TopAlbumsSection.jsx";
 import HorizontalDivider from "../Dividers/HorizontalDivider.jsx";
 import NewAlbumsSection from "./NewAlbumsSection.jsx";
+import SongsSection from "./SongsSection.jsx";
 
 function Section() {
   const [topAlbums, setTopAlbums] = useState([]);
   const [newAlbums, setNewAlbums] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   const fetchAllAlbums = async () => {
     try {
-      const [topRes, newRes] = await Promise.allSettled([
+      const [topRes, newRes, genresRes] = await Promise.allSettled([
         axiosInstance.get("/albums/top"),
-        axiosInstance.get("/albums/new")
+        axiosInstance.get("/albums/new"),
+        axiosInstance.get("/genres")
       ]);
 
       setTopAlbums(topRes.value.data);
       setNewAlbums(newRes.value.data);
-
-      console.log(topRes.value.data);
-      console.log(newRes.value.data);
+      setGenres(genresRes.value.data.data);
     } catch (error) {
-      console.log(error);
+      if (error?.response?.status < 500)
+        console.log(error?.response?.data?.message);
+      else console.log("Something went wrong!");
     }
   };
 
@@ -42,6 +45,10 @@ function Section() {
         <HorizontalDivider />
 
         <NewAlbumsSection newAlbums={newAlbums} />
+
+        <HorizontalDivider />
+
+        <SongsSection tabs={genres} />
 
         <HorizontalDivider />
       </Box>
