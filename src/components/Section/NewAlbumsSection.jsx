@@ -23,7 +23,7 @@ function NewAlbumsSection({newAlbums}) {
 
       <Collapse in={!isOpen} timeout={500} unmountOnExit>
         <Box position="relative">
-          <Carousel albums={newAlbums} />
+          <Carousel albums={newAlbums} carouselId={"newAlbums"} />
         </Box>
       </Collapse>
     </>

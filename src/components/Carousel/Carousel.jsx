@@ -3,22 +3,25 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Card from "../Card/Card";
-import styles from "./Carousel.module.css";
+import "./Carousel.css";
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 
-function Carousel({ albums }) {
-  return (
-    <div className={styles.carouselWrapper}>
-      <LeftButton />
+function Carousel({ albums, carouselId }) {
+  const prevButton = `${carouselId}-prev`;
+  const nextButton = `${carouselId}-next`;
 
-      <RightButton />
+  return (
+    <>
+      <LeftButton btnName={prevButton} />
+
+      <RightButton btnName={nextButton} />
 
       <Swiper
         modules={[Navigation]}
         navigation={{
-          nextEl: `swiper-button-next`,
-          prevEl: `swiper-button-prev`,
+          nextEl: `.${nextButton}`,
+          prevEl: `.${prevButton}`,
         }}
         spaceBetween={3}
         breakpoints={{
@@ -28,12 +31,12 @@ function Carousel({ albums }) {
         }}
       >
         {albums.map((album) => (
-          <SwiperSlide key={album.id} className={styles.elements}>
+          <SwiperSlide key={album.id} className="elements">
             <Card album={album} />
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </>
   );
 }
 

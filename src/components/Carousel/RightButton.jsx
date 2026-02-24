@@ -1,8 +1,9 @@
 import rightButton from "../../assets/right-button.svg";
+import "./Carousel.css";
 
-function RightButton() {
+function RightButton({ btnName }) {
   return (
-    <button className="swiper-button-next">
+    <button className={btnName}>
       <img src={rightButton} alt="right-button" />
     </button>
   );

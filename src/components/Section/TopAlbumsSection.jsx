@@ -23,7 +23,7 @@ function TopAlbumsSection({ topAlbums }) {
 
       <Collapse in={!isOpen} timeout={500} unmountOnExit>
         <Box position="relative">
-          <Carousel albums={topAlbums} />
+          <Carousel albums={topAlbums} carouselId={"topAlbums"} />
         </Box>
       </Collapse>
     </>
