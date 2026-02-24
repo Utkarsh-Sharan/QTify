@@ -9,7 +9,7 @@ import RightButton from "./RightButton";
 
 function Carousel({ albums }) {
   return (
-    <>
+    <div className={styles.carouselWrapper}>
       <LeftButton />
 
       <RightButton />
@@ -17,8 +17,8 @@ function Carousel({ albums }) {
       <Swiper
         modules={[Navigation]}
         navigation={{
-          nextEl: `.${styles.swiperButtonNext}`,
-          prevEl: `.${styles.swiperButtonPrev}`,
+          nextEl: `swiper-button-next`,
+          prevEl: `swiper-button-prev`,
         }}
         spaceBetween={3}
         breakpoints={{
@@ -33,7 +33,7 @@ function Carousel({ albums }) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 }
 

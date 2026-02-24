@@ -1,21 +1,30 @@
-.swiperButtonPrev {
-    all: unset;
-    position: absolute;
-    top: 40%;
-    left: 1%;
-    z-index: 10;
+.carouselWrapper [class$="-prev"],
+.carouselWrapper [class$="-next"] {
+  all: unset;
+  position: absolute;
+  top: 40%;
+  z-index: 10;
+  cursor: pointer;
 }
 
-.swiperButtonNext {
-    all: unset;
-    position: absolute;
-    top: 40%;
-    right: 1%;
-    z-index: 10;
+.carouselWrapper [class$="-prev"] {
+  left: 1%;
+}
+
+.carouselWrapper [class$="-next"] {
+  right: 1%;
+}
+
+.carouselWrapper [class$="-next"].swiper-button-disabled,
+.carouselWrapper [class$="-prev"].swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+  top: 40%;
 }
 
 .elements {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

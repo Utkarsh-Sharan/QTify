@@ -1,9 +1,8 @@
 import leftButton from "../../assets/left-button.svg";
-import styles from "./Carousel.module.css";
 
 function LeftButton() {
   return (
-    <button className={styles.swiperButtonPrev}>
+    <button className="swiper-button-prev">
       <img src={leftButton} alt="left-button" />
     </button>
   );
