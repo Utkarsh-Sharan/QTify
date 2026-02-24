@@ -1,7 +1,9 @@
 .topAlbums-next,
 .topAlbums-prev,
 .newAlbums-next,
-.newAlbums-prev {
+.newAlbums-prev,
+.songs-prev,
+.songs-next {
   all: unset;
   position: absolute;
   top: 40%;
@@ -10,12 +12,14 @@
 }
 
 .newAlbums-prev,
-.topAlbums-prev {
+.topAlbums-prev,
+.songs-prev {
   left: 1%;
 }
 
 .topAlbums-next,
-.newAlbums-next {
+.newAlbums-next,
+.songs-next {
   right: 1%;
 }
 
