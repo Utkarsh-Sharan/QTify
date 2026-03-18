@@ -1,16 +1,58 @@
-# React + Vite
+# 🎵 Qtify - Music Streaming Platform (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Qtify is a **React-based frontend project** that simulates a music streaming platform.  
+It focuses on building a clean UI with Material UI components, carousels powered by Swiper, and API integrations to fetch and display albums and songs.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+### Libraries
+- **Material UI (MUI)** → UI components and styling
+- **Swiper.js** → Carousels for albums and songs
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Components
+- **Navbar** → Logo, search bar, and action button
+- **Header** → Hero section with platform description
+- **Albums Section**
+  - **Top Albums** → Fetched via API, collapsible view:
+    - Collapsed → Carousel (Swiper)
+    - Expanded → Grid layout
+  - **New Albums** → Same behavior as Top Albums
+- **Songs Section**
+  - Carousel view only
+  - Filtering tabs: All, Pop, Rock, Jazz, Blues
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚡ Tech Stack
+- **Frontend:** React
+- **UI:** Material UI
+- **Carousels:** Swiper.js
+- **Networking:** Axios for API calls
+
+---
+
+## 📸 Screenshots
+(Add screenshots here once ready)
+
+---
+
+## 🏁 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- npm
+
+### Installation
+```bash
+# Clone repo
+git clone https://github.com/Utkarsh-Sharan/QTify.git
+cd QTify
+
+# Install dependencies
+npm install
+
+# Run development server
+npm start
+```
