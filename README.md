@@ -60,5 +60,5 @@ cd QTify
 npm install
 
 # Run development server
-npm start
+npm run dev
 ```
