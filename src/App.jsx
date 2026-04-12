@@ -1,13 +1,11 @@
-import Hero from "./components/Hero/Hero"
 import Navbar from "./components/Navbar/Navbar"
-import Section from "./components/Section/Section"
+import HomePage from "./pages/HomePage"
 
 function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Section />
+      <HomePage />
     </>
   )
 }
