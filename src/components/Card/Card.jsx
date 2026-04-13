@@ -1,26 +1,36 @@
 import { Box, Chip, Typography } from "@mui/material";
 import styles from "./Card.module.css";
+import { useNavigate } from "react-router-dom";
 
-function Card({album, song}) {
+function Card({ album, song }) {
   let data = null;
 
-  if(album){
+  if (album) {
     data = {
       image: album.image,
       follows: album.follows,
       title: album.title,
+      songs: album.songs,
     };
-  }
-  else{
+  } else {
     data = {
       image: song.image,
       likes: song.likes,
       title: song.title,
-    }
+    };
   }
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (!album.songs) return;
+
+    localStorage.setItem("currentAlbum", JSON.stringify(album));
+    navigate("/album");
+  };
+
   return (
-    <Box className={styles.card}>
+    <Box className={styles.card} onClick={handleClick}>
       <Box sx={{ bgcolor: "text.primary" }} borderRadius="10px">
         <img src={data.image} alt="image" className={styles.image} />
 
