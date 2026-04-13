@@ -3,15 +3,9 @@ import styles from "./AlbumDetailsHeader.module.css";
 import SmallDot from "../../assets/small-dot.png";
 import ShuffleIcon from "../../assets/shuffle-icon.svg";
 import LibraryIcon from "../../assets/library-icon.svg";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 function AlbumDetailsHeader() {
-  const [totalDuration, setTotalDuration] = useState({
-    hours: 0,
-    minutes: 0,
-  });
-  const [songs, setSongs] = useState([]);
-
   const currentAlbum = JSON.parse(localStorage.getItem("currentAlbum"));
 
   const calculateTotalAlbumDuration = () => {
@@ -25,17 +19,10 @@ function AlbumDetailsHeader() {
       (totalDuration % (1000 * 60 * 60)) / (1000 * 60),
     );
 
-    setTotalDuration((prev) => ({ ...prev, hours: hours, minutes: minutes }));
+    return {hours: hours, minutes: minutes};
   };
 
-  useEffect(() => {
-    const onLoadHandler = async () => {
-      calculateTotalAlbumDuration();
-      setSongs(currentAlbum.songs);
-    };
-
-    onLoadHandler();
-  }, []);
+  const totalDuration = useMemo(() => calculateTotalAlbumDuration(), [currentAlbum]);
 
   return (
     <Box className={styles.header}>
