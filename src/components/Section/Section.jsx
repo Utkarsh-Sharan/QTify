@@ -16,7 +16,7 @@ function Section() {
       const [topRes, newRes, genresRes] = await Promise.allSettled([
         axiosInstance.get("/albums/top"),
         axiosInstance.get("/albums/new"),
-        axiosInstance.get("/genres")
+        axiosInstance.get("/genres"),
       ]);
 
       setTopAlbums(topRes.value.data);

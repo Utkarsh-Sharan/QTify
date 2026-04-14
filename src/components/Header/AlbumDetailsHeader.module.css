@@ -1,0 +1,12 @@
+.header {
+    margin-top: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 50px;
+}
+
+.profile {
+    width: 150px;
+    border-radius: 20px;
+}

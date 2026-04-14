@@ -1,31 +1,65 @@
 import { Box, Chip, Typography } from "@mui/material";
 import styles from "./Card.module.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-function Card({album, song}) {
-  let data = null;
+function Card({ album, song }) {
+  const navigate = useNavigate();
+  const [albumData, setAlbumData] = useState({
+    image: album?.image,
+    follows: album?.follows,
+    title: album?.title,
+    songs: album?.songs,
+  });
+  const [songData, setSongData] = useState({
+    image: song?.image,
+    likes: song?.likes,
+    title: song?.title,
+  });
 
-  if(album){
-    data = {
-      image: album.image,
-      follows: album.follows,
-      title: album.title,
-    };
-  }
-  else{
-    data = {
-      image: song.image,
-      likes: song.likes,
-      title: song.title,
+  const handleAlbumClick = () => {
+    localStorage.setItem("currentAlbum", JSON.stringify(album));
+    navigate("/album");
+  };
+
+  const handleSongClick = () => {
+    console.log("song clicked");
+    return;
+  };
+
+  const handleClick = () => {
+    if (song) handleSongClick();
+    else handleAlbumClick();
+  };
+
+  useEffect(() => {
+    const onLoadHandler = async () => {
+      setAlbumData((prev) => ({
+        ...prev,
+        image: album?.image,
+        follows: album?.follows,
+        title: album?.title,
+        songs: album?.songs,
+      }));
+
+      setSongData((prev) => ({
+        ...prev,
+        image: song?.image,
+        likes: song?.likes,
+        title: song?.title,
+      }));
     }
-  }
+
+    onLoadHandler();
+  }, []);
 
   return (
-    <Box className={styles.card}>
+    <Box className={styles.card} onClick={handleClick}>
       <Box sx={{ bgcolor: "text.primary" }} borderRadius="10px">
-        <img src={data.image} alt="image" className={styles.image} />
+        <img src={album ? albumData.image : songData.image} alt="image" className={styles.image} />
 
         <Chip
-          label={album ? `${data.follows} follows` : `${data.likes} likes`}
+          label={album ? `${albumData.follows} follows` : `${songData.likes} likes`}
           sx={{
             bgcolor: "background.default",
             color: "text.primary",
@@ -37,7 +71,7 @@ function Card({album, song}) {
       </Box>
 
       <Typography sx={{ color: "text.primary", fontSize: "14px" }}>
-        {`${data.title}`}
+        {`${album ? albumData.title : songData.title}`}
       </Typography>
     </Box>
   );
