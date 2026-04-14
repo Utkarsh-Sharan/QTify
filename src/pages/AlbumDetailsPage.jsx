@@ -13,7 +13,12 @@ function AlbumDetailsPage() {
 
   return (
     <Box px="30px" py="15px">
-      <img src={BackButtonImage} alt="back-button" onClick={handleClick} />
+      <img
+        src={BackButtonImage}
+        alt="back-button"
+        onClick={handleClick}
+        style={{ cursor: "pointer" }}
+      />
 
       <AlbumDetailsHeader />
 
