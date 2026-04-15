@@ -1,0 +1,24 @@
+.songTitle {
+    font-size: 15px;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.songTitle span {
+    display: inline-block;
+    padding-left: 50%;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

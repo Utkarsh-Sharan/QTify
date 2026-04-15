@@ -2,6 +2,7 @@ import { Box, Chip, Typography } from "@mui/material";
 import styles from "./Card.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAlbumsStore } from "../../stores/useAlbumsStore";
 
 function Card({ album, song }) {
   const navigate = useNavigate();
@@ -17,14 +18,17 @@ function Card({ album, song }) {
     title: song?.title,
   });
 
+  const { setCurrentSong } = useAlbumsStore();
+
   const handleAlbumClick = () => {
     localStorage.setItem("currentAlbum", JSON.stringify(album));
     navigate("/album");
   };
 
   const handleSongClick = () => {
-    console.log("song clicked");
-    return;
+    localStorage.setItem("currentSong", JSON.stringify(song));
+    localStorage.removeItem("currentAlbum");
+    setCurrentSong(song);
   };
 
   const handleClick = () => {
@@ -48,7 +52,7 @@ function Card({ album, song }) {
         likes: song?.likes,
         title: song?.title,
       }));
-    }
+    };
 
     onLoadHandler();
   }, []);
@@ -56,10 +60,16 @@ function Card({ album, song }) {
   return (
     <Box className={styles.card} onClick={handleClick}>
       <Box sx={{ bgcolor: "text.primary" }} borderRadius="10px">
-        <img src={album ? albumData.image : songData.image} alt="image" className={styles.image} />
+        <img
+          src={album ? albumData.image : songData.image}
+          alt="image"
+          className={styles.image}
+        />
 
         <Chip
-          label={album ? `${albumData.follows} follows` : `${songData.likes} likes`}
+          label={
+            album ? `${albumData.follows} follows` : `${songData.likes} likes`
+          }
           sx={{
             bgcolor: "background.default",
             color: "text.primary",

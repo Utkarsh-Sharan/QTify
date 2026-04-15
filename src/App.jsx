@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import AlbumDetailsPage from "./pages/AlbumDetailsPage.jsx";
+import SongPlayer from "./components/Song/SongPlayer.jsx";
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
 
         <Route path="/album" element={<AlbumDetailsPage />} />
       </Routes>
+
+      <SongPlayer />
     </>
   );
 }

@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 export const useAlbumsStore = create((set) => ({
-  currentAlbum: [],
+  currentSong: null,
 
-  setCurrentAlbum: async (data) => {
-    set({ currentAlbum: data });
+  setCurrentSong: async (data) => {
+    set({ currentSong: data });
   },
 }));
